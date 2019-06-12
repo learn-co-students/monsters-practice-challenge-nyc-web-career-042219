@@ -6,10 +6,11 @@ let page = 1;
 const monContainer = document.querySelector('#monster-container');
 const fwdBtn = document.querySelector('#forward');
 const bckBtn = document.querySelector('#back');
-const createMons = document.querySelector('#create-monster')
+const createMon = document.querySelector('#create-monster')
+const monForm = document.querySelector('#monster-form')
 
 init(page)
-createMons.appendChild(createForm())
+createMon.appendChild(createForm())
 
 //RENDER METHODS
 function renderMonster(monster) {
@@ -46,20 +47,20 @@ bckBtn.addEventListener('click', (e) =>{
     init(--page)
 })
 
-createMons.addEventListener('submit', (e) => {
+createMon.addEventListener('submit', (e) => {
     e.preventDefault();
-    let createName = e.target[0].value;
-    let createAge = e.target[1].value;
-    let createDesc = e.target[2].value;
+    let name = e.target[0].value;
+    let age = e.target[1].value;
+    let description = e.target[2].value;
     fetch(BASE_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "name": createName,
-            "age": createAge,
-            "description": createDesc
+            name,
+            age,
+            description
         })
     })
     .then(res => res.json())
